@@ -27,13 +27,21 @@ namespace logistics.Data
         {
             //modelBuilder.ApplyConfiguration(new AdminEntityTypeConfiguration());
             //modelBuilder.ApplyConfiguration(new RoleEntityTypeConfiguration());
+            //modelBuilder.Entity<User>().ToTable("Users");
+            //modelBuilder.Entity<Role>().ToTable("Roles");
+            //modelBuilder.Entity<UserRole>().ToTable("UserRoles").HasNoKey();
+            //modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
+            //modelBuilder.Entity<UserClaim>().ToTable("UserClaims");
+            //modelBuilder.Entity<RoleClaim>().ToTable("RoleClaims");
+            //modelBuilder.Entity<UserToken>().ToTable("UserTokens");
+
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Role>().ToTable("Roles");
-            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles").HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogins").HasKey(ul => new { ul.LoginProvider, ul.ProviderKey });
             modelBuilder.Entity<UserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<RoleClaim>().ToTable("RoleClaims");
-            modelBuilder.Entity<UserToken>().ToTable("UserTokens");
+            modelBuilder.Entity<UserToken>().ToTable("UserTokens").HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
         }
     }
 }

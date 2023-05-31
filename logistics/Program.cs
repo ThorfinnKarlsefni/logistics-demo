@@ -24,7 +24,8 @@ builder.Services.AddDbContext<WebDbContext>(options => options.UseNpgsql(builder
 
 //identity
 builder.Services.AddIdentity<User, Role>()
-    .AddEntityFrameworkStores<WebDbContext>();
+    .AddEntityFrameworkStores<WebDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddIdentityCore<User>(options =>
 {

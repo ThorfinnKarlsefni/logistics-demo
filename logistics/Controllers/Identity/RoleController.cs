@@ -51,7 +51,7 @@ namespace logistics.Controllers.Identity
             if (!result.Succeeded)
                 return BadRequest(result.Errors.FirstOrDefault()?.Description);
 
-            return Ok();
+            return Ok("successfully");
         }
 
         [HttpPut("{id}")]

@@ -12,7 +12,7 @@ using logistics.Data;
 namespace logistics.Migrations
 {
     [DbContext(typeof(WebDbContext))]
-    [Migration("20230527080423_identity_init")]
+    [Migration("20230530114311_identity_init")]
     partial class identity_init
     {
         /// <inheritdoc />
@@ -154,73 +154,57 @@ namespace logistics.Migrations
 
             modelBuilder.Entity("logistics.Models.Identity.UserLogin", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
                     b.Property<string>("LoginProvider")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
                     b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("logistics.Models.Identity.UserRole", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "RoleId");
 
                     b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("logistics.Models.Identity.UserToken", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
                     b.Property<string>("LoginProvider")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
+                    b.Property<long>("Id")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens", (string)null);
                 });

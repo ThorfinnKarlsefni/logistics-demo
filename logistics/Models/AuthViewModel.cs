@@ -19,6 +19,13 @@ namespace logistics.Models
             public string? Name { get; set; }
         }
 
+        public class UserRoleViewModel
+        {
+            public string Id { get; set; }
+            public string RoleId { get; set; }
+            public string? Token { get; set; }
+        }
+
         public class RegisterUserViewModel
         {
             public string? UserName { get; set; }

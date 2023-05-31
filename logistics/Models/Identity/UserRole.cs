@@ -6,8 +6,7 @@ namespace logistics.Models.Identity
 {
     public class UserRole : IdentityUserRole<long>
     {
-        [Key]
-        public long Id { get; set; }
+
     }
 }
 
